@@ -21,11 +21,16 @@ func connect_to_host(host: String, port: int) -> void:
 		stream.poll()
 	var length = stream.get_available_bytes()
 	var bytes = stream.get_data(length)
+	if bytes[0] != OK:
+		print("ERROR on receive")
+		return
+	bytes = bytes[1]
+
 	print("received %d bytes" % [length])
 	print("bytes: ", bytes)
 
 	var data = proto.Data.new()
-	var res = data.from_bytes(bytes[1])
+	var res = data.from_bytes(bytes)
 	if res != proto.PB_ERR.NO_ERRORS:
 		print("ERROR could not deserialize")
 		return
