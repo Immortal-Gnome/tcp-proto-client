@@ -15,6 +15,10 @@ run/main_scene="uid://bog5uc5d4kf0d"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/protobuf/plugin.cfg")
@@ -22,3 +26,4 @@ enabled=PackedStringArray("res://addons/protobuf/plugin.cfg")
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
