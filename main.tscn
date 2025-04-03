@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bog5uc5d4kf0d"]
+[gd_scene load_steps=3 format=3 uid="uid://bog5uc5d4kf0d"]
 
 [ext_resource type="Script" uid="uid://cqlor4gwjnxcs" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://gle2q1rwh3ui" path="res://scenes/tile.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ig7tw")
@@ -24,13 +25,127 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/HBoxContainer"]
+layout_mode = 2
+
+[node name="ConnectBtn" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Connect"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="SetupGridBtn" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
+text = "setupgrid"
+
+[node name="Color1Btn" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Color 1"
+
+[node name="ColorAllBtn" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Color all"
+
+[node name="ClearBtn" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear Tiles"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+
+[node name="TextureRect" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect2" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect3" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect4" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect5" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect6" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect7" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect8" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect9" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect10" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect11" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect12" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect13" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect14" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect15" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect16" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect17" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect18" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect19" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect20" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect21" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect22" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect23" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect24" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2
+
+[node name="TextureRect25" parent="CanvasLayer/Control2/HBoxContainer/GridContainer" instance=ExtResource("2_0xm2m")]
+layout_mode = 2

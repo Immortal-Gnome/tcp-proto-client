@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gle2q1rwh3ui"]
+
+[ext_resource type="Texture2D" uid="uid://spj1gyoxab4q" path="res://assets/tile.png" id="1_3dk36"]
+
+[node name="TextureRect" type="TextureRect"]
+texture = ExtResource("1_3dk36")
