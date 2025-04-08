@@ -749,24 +749,79 @@ class Data:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-class Color_Data:
+class Grid_Data:
 	func _init():
 		var service
 		
-		__r = PBField.new("r", PB_DATA_TYPE.BYTES, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES])
+		var __tiles_default: Array[Tile_Data] = []
+		__tiles = PBField.new("tiles", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 1, true, __tiles_default)
+		service = PBServiceField.new()
+		service.field = __tiles
+		service.func_ref = Callable(self, "add_tiles")
+		data[__tiles.tag] = service
+		
+	var data = {}
+	
+	var __tiles: PBField
+	func get_tiles() -> Array[Tile_Data]:
+		return __tiles.value
+	func clear_tiles() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		__tiles.value.clear()
+	func add_tiles() -> Tile_Data:
+		var element = Tile_Data.new()
+		__tiles.value.append(element)
+		return element
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class Tile_Data:
+	func _init():
+		var service
+		
+		__r = PBField.new("r", PB_DATA_TYPE.DOUBLE, PB_RULE.OPTIONAL, 1, true, DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE])
 		service = PBServiceField.new()
 		service.field = __r
 		data[__r.tag] = service
 		
-		__g = PBField.new("g", PB_DATA_TYPE.BYTES, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES])
+		__g = PBField.new("g", PB_DATA_TYPE.DOUBLE, PB_RULE.OPTIONAL, 2, true, DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE])
 		service = PBServiceField.new()
 		service.field = __g
 		data[__g.tag] = service
 		
-		__b = PBField.new("b", PB_DATA_TYPE.BYTES, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES])
+		__b = PBField.new("b", PB_DATA_TYPE.DOUBLE, PB_RULE.OPTIONAL, 3, true, DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE])
 		service = PBServiceField.new()
 		service.field = __b
 		data[__b.tag] = service
+		
+		__x = PBField.new("x", PB_DATA_TYPE.INT32, PB_RULE.OPTIONAL, 4, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = __x
+		data[__x.tag] = service
+		
+		__y = PBField.new("y", PB_DATA_TYPE.INT32, PB_RULE.OPTIONAL, 5, true, DEFAULT_VALUES_3[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = __y
+		data[__y.tag] = service
 		
 	var data = {}
 	
@@ -775,12 +830,12 @@ class Color_Data:
 		if __r.value != null:
 			return true
 		return false
-	func get_r() -> PackedByteArray:
+	func get_r() -> float:
 		return __r.value
 	func clear_r() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		__r.value = DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES]
-	func set_r(value : PackedByteArray) -> void:
+		__r.value = DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE]
+	func set_r(value : float) -> void:
 		__r.value = value
 	
 	var __g: PBField
@@ -788,12 +843,12 @@ class Color_Data:
 		if __g.value != null:
 			return true
 		return false
-	func get_g() -> PackedByteArray:
+	func get_g() -> float:
 		return __g.value
 	func clear_g() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		__g.value = DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES]
-	func set_g(value : PackedByteArray) -> void:
+		__g.value = DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE]
+	func set_g(value : float) -> void:
 		__g.value = value
 	
 	var __b: PBField
@@ -801,13 +856,39 @@ class Color_Data:
 		if __b.value != null:
 			return true
 		return false
-	func get_b() -> PackedByteArray:
+	func get_b() -> float:
 		return __b.value
 	func clear_b() -> void:
 		data[3].state = PB_SERVICE_STATE.UNFILLED
-		__b.value = DEFAULT_VALUES_3[PB_DATA_TYPE.BYTES]
-	func set_b(value : PackedByteArray) -> void:
+		__b.value = DEFAULT_VALUES_3[PB_DATA_TYPE.DOUBLE]
+	func set_b(value : float) -> void:
 		__b.value = value
+	
+	var __x: PBField
+	func has_x() -> bool:
+		if __x.value != null:
+			return true
+		return false
+	func get_x() -> int:
+		return __x.value
+	func clear_x() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		__x.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT32]
+	func set_x(value : int) -> void:
+		__x.value = value
+	
+	var __y: PBField
+	func has_y() -> bool:
+		if __y.value != null:
+			return true
+		return false
+	func get_y() -> int:
+		return __y.value
+	func clear_y() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		__y.value = DEFAULT_VALUES_3[PB_DATA_TYPE.INT32]
+	func set_y(value : int) -> void:
+		__y.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

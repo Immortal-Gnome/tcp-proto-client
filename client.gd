@@ -16,6 +16,32 @@ func _ready() -> void:
 	add_child(timeout_timer)
 	#timeout_timer.timeout.connect(_on_connection_timeout)
 
+
+func _process(delta: float) -> void:
+	if !peer: return
+	
+	if peer.get_status() != StreamPeerTCP.STATUS_CONNECTED: return
+	peer.poll()
+	
+	if peer.get_available_bytes() == 0: return
+	
+	var length = peer.get_available_bytes()
+	var bytes = peer.get_data(length)
+	if bytes[0] != OK:
+		print("ERROR on receive")
+	bytes = bytes[1]
+	print("bytes: ", bytes)
+	var data = proto.Grid_Data.new()
+	var res = data.from_bytes(bytes)
+	if res != proto.PB_ERR.NO_ERRORS:
+		print("ERROR could not deserialize")
+	print("NO ERROR")
+	print("Printing Tilemap")
+	for tile in data.get_tiles():
+		print("tile: " + tile.to_string())
+
+
+
 func connect_client(host: String, port:int) -> String:
 	print("Connecting to %s:%d" % [host, port])
 	peer = StreamPeerTCP.new()
@@ -54,6 +80,7 @@ func send_message(msg:int):
 	#print("2 :" + str(var_to_bytes(1)))
 	#print("bytes:" + str(var_to_bytes(msg)))
 	peer.put_32(msg)
+	
 	#peer.put_data(var_to_bytes(msg))
 	pass
 

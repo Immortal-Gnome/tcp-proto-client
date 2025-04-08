@@ -12,6 +12,7 @@ const PORT: int = 7000
 @onready var color1_btn: Button = %Color1Btn
 @onready var colorall_btn: Button = %ColorAllBtn
 @onready var clear_btn: Button = %ClearBtn
+@onready var print_server: Button = %PrintServer
 @onready var label: Label = %Label
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _ready() -> void:
 	color1_btn.pressed.connect(_on_color1_button_pressed)
 	colorall_btn.pressed.connect(_on_colorall_button_pressed)
 	clear_btn.pressed.connect(_on_clear_button_pressed)
+	print_server.pressed.connect(_on_print_server)
 
 
 func _on_connect_button_pressed() -> void:
@@ -40,22 +42,22 @@ func _on_disconnect_button_pressed() -> void:
 func _on_setupgrid_button_pressed() -> void:
 	print("try_send_msg: SETUP GRID")
 	await client.send_message(1)
-	pass
 	
 	
 func _on_color1_button_pressed() -> void:
 	print("try_send_msg: COLOR RANDOM")
 	await client.send_message(2)
-	pass
 	
 	
 func _on_colorall_button_pressed() -> void:
 	print("try_send_msg: COLOR ALL")
 	await client.send_message(3)
-	pass
 	
 	
 func _on_clear_button_pressed() -> void:
 	print("try_send_msg: CLEAR GRID")
 	await client.send_message(4)
-	pass
+
+func _on_print_server() -> void:
+	print("Printing Grid on server")
+	await client.send_message(5)

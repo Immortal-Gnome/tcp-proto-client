@@ -90,6 +90,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Clear Tiles"
 
+[node name="PrintServer" type="Button" parent="CanvasLayer/Control2/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear Tiles"
+
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
