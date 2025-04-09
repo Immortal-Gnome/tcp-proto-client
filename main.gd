@@ -1,6 +1,6 @@
 extends Node2D
 
-const HOST: String = "192.168.1.236" # fazil - 51.20.64.237
+const HOST: String = "51.20.64.237" # fazil - 51.20.64.237
 const PORT: int = 7000
 
 @onready var client: Client = Client.new()
