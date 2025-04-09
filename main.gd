@@ -15,6 +15,9 @@ const PORT: int = 7000
 @onready var print_server: Button = %PrintServer
 @onready var label: Label = %Label
 
+
+@onready var grid : ColorGrid = %GridContainer
+
 func _ready() -> void:
 	add_child(client)
 	connect_btn.pressed.connect(_on_connect_button_pressed)
@@ -24,6 +27,7 @@ func _ready() -> void:
 	colorall_btn.pressed.connect(_on_colorall_button_pressed)
 	clear_btn.pressed.connect(_on_clear_button_pressed)
 	print_server.pressed.connect(_on_print_server)
+	client.update_grid.connect(_update_grid)
 
 
 func _on_connect_button_pressed() -> void:
@@ -52,12 +56,19 @@ func _on_color1_button_pressed() -> void:
 func _on_colorall_button_pressed() -> void:
 	print("try_send_msg: COLOR ALL")
 	await client.send_message(3)
+	#grid._set_all_random()
 	
 	
 func _on_clear_button_pressed() -> void:
 	print("try_send_msg: CLEAR GRID")
 	await client.send_message(4)
+	#grid._set_all_white()
 
 func _on_print_server() -> void:
 	print("Printing Grid on server")
 	await client.send_message(5)
+
+
+func _update_grid(data : proto.Grid_Data) -> void:
+	print("UPDATE_GRID_CALLED")
+	pass

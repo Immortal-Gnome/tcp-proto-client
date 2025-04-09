@@ -9,6 +9,7 @@ const proto = preload("res://proto/data.proto.gd")
 
 var timeout: bool = false
 
+signal update_grid(data : proto.Grid_Data)
 func _ready() -> void:
 	timeout_timer.autostart = false
 	timeout_timer.one_shot = true
