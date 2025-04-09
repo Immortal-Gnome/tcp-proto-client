@@ -69,6 +69,9 @@ func _on_print_server() -> void:
 	await client.send_message(5)
 
 
-func _update_grid(data : proto.Grid_Data) -> void:
+func _update_grid(data : Client.proto.Grid_Data) -> void:
 	print("UPDATE_GRID_CALLED")
-	pass
+	var tiles = data.get_tiles() as Array[Client.proto.Tile_Data]
+	for tile in tiles:
+		var c := Color(tile.get_r(), tile.get_g(), tile.get_b())
+		grid._set_tile(tile.get_x(), tile.get_y(), c)

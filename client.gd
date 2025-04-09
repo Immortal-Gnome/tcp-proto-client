@@ -10,6 +10,7 @@ const proto = preload("res://proto/data.proto.gd")
 var timeout: bool = false
 
 signal update_grid(data : proto.Grid_Data)
+
 func _ready() -> void:
 	timeout_timer.autostart = false
 	timeout_timer.one_shot = true
@@ -37,9 +38,10 @@ func _process(delta: float) -> void:
 	if res != proto.PB_ERR.NO_ERRORS:
 		print("ERROR could not deserialize")
 	print("NO ERROR")
-	print("Printing Tilemap")
-	for tile in data.get_tiles():
-		print("tile: " + tile.to_string())
+	#print("Printing Tilemap")
+	update_grid.emit(data)
+	#for tile in data.get_tiles():
+		#print("tile: " + tile.to_string())
 
 
 
